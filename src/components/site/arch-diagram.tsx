@@ -4,20 +4,37 @@ import {
   type DiagramNode,
 } from '#/data/architecture-diagram'
 
+const GRID_4 = 'grid w-full grid-cols-4 gap-2'
+const GRID_3 = 'grid w-full grid-cols-3 gap-2'
+
+function nodeGlassStyle(node: DiagramNode) {
+  return {
+    borderColor: `${node.accent}55`,
+    backgroundColor: 'rgba(12, 18, 32, 0.42)',
+    boxShadow: [
+      node.glow ? `0 0 18px ${node.accent}18` : '',
+      'inset 0 1px 0 rgba(255, 255, 255, 0.07)',
+    ]
+      .filter(Boolean)
+      .join(', '),
+  }
+}
+
 function DiagramNodeCard({ node, compact = false }: { node: DiagramNode; compact?: boolean }) {
   const Icon = node.icon
 
   return (
     <div
-      className={`flex items-center gap-2 rounded-lg border px-3 py-2 ${node.glow ? 'shadow-[0_0_20px_rgba(139,92,246,0.15)]' : ''}`}
-      style={{
-        borderColor: `${node.accent}55`,
-        backgroundColor: node.accentBg,
-      }}
+      className="diagram-node flex items-center gap-2 rounded-lg border px-3 py-2"
+      style={nodeGlassStyle(node)}
     >
+      <span aria-hidden className="diagram-node-shine" />
       <div
-        className="flex size-7 shrink-0 items-center justify-center rounded-md"
-        style={{ backgroundColor: `${node.accent}22` }}
+        className="diagram-icon-glass relative z-[1] flex size-7 shrink-0 items-center justify-center rounded-md"
+        style={{
+          backgroundColor: `${node.accent}20`,
+          borderColor: `${node.accent}35`,
+        }}
       >
         {node.techName ? (
           <TechIcon name={node.techName} size={compact ? 14 : 16} />
@@ -26,7 +43,7 @@ function DiagramNodeCard({ node, compact = false }: { node: DiagramNode; compact
         ) : null}
       </div>
       <span
-        className={`font-medium text-[var(--text-primary)] ${compact ? 'text-[10px]' : 'text-xs'}`}
+        className={`relative z-[1] font-medium text-[var(--text-primary)] ${compact ? 'text-[10px] leading-tight' : 'text-xs'}`}
       >
         {node.label}
       </span>
@@ -34,11 +51,100 @@ function DiagramNodeCard({ node, compact = false }: { node: DiagramNode; compact
   )
 }
 
-function Connector({ className }: { className?: string }) {
+function ArrowHead({ x, y, size = 3.5 }: { x: number; y: number; size?: number }) {
   return (
-    <div
-      className={`mx-auto h-6 w-px bg-gradient-to-b from-[rgba(139,92,246,0.5)] to-[rgba(59,130,246,0.3)] ${className ?? ''}`}
+    <polygon
+      className="diagram-wire-fill"
+      points={`${x},${y} ${x - size},${y - size * 1.4} ${x + size},${y - size * 1.4}`}
     />
+  )
+}
+
+function CenterStem({ height = 10 }: { height?: number }) {
+  return (
+    <svg width="12" height={height} className="mx-auto block shrink-0" aria-hidden>
+      <line className="diagram-wire" x1="6" y1="0" x2="6" y2={height} />
+    </svg>
+  )
+}
+
+function DownArrow({ height = 22 }: { height?: number }) {
+  const lineEnd = height - 8
+
+  return (
+    <svg width="12" height={height} className="block shrink-0" aria-hidden>
+      <line className="diagram-wire" x1="6" y1="0" x2="6" y2={lineEnd} />
+      <ArrowHead x={6} y={height - 2} />
+    </svg>
+  )
+}
+
+function RailSegment({ index, total }: { index: number; total: number }) {
+  const x1 = index === 0 ? '50%' : '0%'
+  const x2 = index === total - 1 ? '50%' : '100%'
+
+  return (
+    <svg width="100%" height="10" className="block overflow-visible" aria-hidden>
+      <line className="diagram-wire" x1={x1} y1="10" x2={x2} y2="10" />
+    </svg>
+  )
+}
+
+function VerticalArrow({ height = 28 }: { height?: number }) {
+  return (
+    <div className="flex justify-center">
+      <DownArrow height={height} />
+    </div>
+  )
+}
+
+function GatewayFork() {
+  return (
+    <div className="w-full">
+      <CenterStem />
+      <div className={GRID_4}>
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="flex flex-col items-center">
+            <RailSegment index={i} total={4} />
+            <DownArrow />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ServicesMerge() {
+  return (
+    <div className="w-full">
+      <div className={GRID_4}>
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="flex flex-col items-center">
+            <svg width="12" height="14" className="block shrink-0" aria-hidden>
+              <line className="diagram-wire" x1="6" y1="0" x2="6" y2="14" />
+            </svg>
+            <RailSegment index={i} total={4} />
+          </div>
+        ))}
+      </div>
+      <VerticalArrow height={24} />
+    </div>
+  )
+}
+
+function DataStoreFork() {
+  return (
+    <div className="w-full">
+      <CenterStem />
+      <div className={GRID_3}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex flex-col items-center">
+            <RailSegment index={i} total={3} />
+            <DownArrow />
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -46,47 +152,43 @@ export function ArchDiagram() {
   const { top, gateway, services, eventBus, dataStores } = architectureDiagram
 
   return (
-    <div className="site-card w-full p-5 md:p-6">
-      <div className="flex flex-col items-center">
-        <div className="w-full max-w-[140px]">
-          <DiagramNodeCard node={top} />
-        </div>
+    <div className="diagram-shell w-full">
+      <div className="diagram-dot-grid" aria-hidden />
+      <div className="diagram-canvas relative px-4 py-6 md:px-5 md:py-7">
+        <div className="flex flex-col items-center">
+          <div className="w-full max-w-[140px]">
+            <DiagramNodeCard node={top} />
+          </div>
 
-        <Connector />
+          <VerticalArrow />
 
-        <div className="w-full max-w-[180px]">
-          <DiagramNodeCard node={gateway} />
-        </div>
+          <div className="w-full max-w-[180px]">
+            <DiagramNodeCard node={gateway} />
+          </div>
 
-        <Connector />
+          <GatewayFork />
 
-        <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-4">
-          {services.map((node) => (
-            <DiagramNodeCard key={node.id} node={node} compact />
-          ))}
-        </div>
+          <div className={GRID_4}>
+            {services.map((node) => (
+              <DiagramNodeCard key={node.id} node={node} compact />
+            ))}
+          </div>
 
-        <div className="relative my-1 flex h-8 w-full items-center justify-center">
-          <div className="absolute inset-x-[10%] top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(139,92,246,0.35)] to-transparent" />
-          {[0, 1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="absolute top-1/2 h-6 w-px -translate-y-1/2 bg-gradient-to-b from-[rgba(139,92,246,0.4)] to-[rgba(59,130,246,0.2)]"
-              style={{ left: `${22 + i * 18}%` }}
-            />
-          ))}
-        </div>
+          <ServicesMerge />
 
-        <div className="w-full max-w-[220px]">
-          <DiagramNodeCard node={eventBus} />
-        </div>
+          <div className="w-full max-w-[220px]">
+            <DiagramNodeCard node={eventBus} />
+          </div>
 
-        <Connector />
+          <VerticalArrow />
 
-        <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
-          {dataStores.map((node) => (
-            <DiagramNodeCard key={node.id} node={node} compact />
-          ))}
+          <DataStoreFork />
+
+          <div className={GRID_3}>
+            {dataStores.map((node) => (
+              <DiagramNodeCard key={node.id} node={node} compact />
+            ))}
+          </div>
         </div>
       </div>
     </div>

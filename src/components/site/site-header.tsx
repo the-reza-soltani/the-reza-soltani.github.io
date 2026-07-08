@@ -1,6 +1,5 @@
-import { resume } from '#/data/resume'
-
 import { ResumeDownloadButton } from '#/components/site/resume-download-button'
+import { resume } from '#/data/resume'
 
 export function SiteHeader() {
   return (

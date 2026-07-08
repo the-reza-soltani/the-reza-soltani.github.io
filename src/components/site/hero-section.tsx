@@ -10,7 +10,7 @@ export function HeroSection() {
   const { hero } = resume
 
   return (
-    <section className="page-wrap py-16 md:py-24">
+    <section className="hero-section page-wrap py-16 md:py-24">
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <div>
           <p className="section-label mb-4">{hero.label}</p>
