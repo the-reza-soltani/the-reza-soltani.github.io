@@ -24,8 +24,8 @@ export const architectureDiagram = {
     id: 'users',
     label: 'Users',
     icon: Users,
-    accent: '#3b82f6',
-    accentBg: 'rgba(59, 130, 246, 0.15)',
+    accent: '#94a3b8',
+    accentBg: 'rgba(148, 163, 184, 0.12)',
   } satisfies DiagramNode,
   gateway: {
     id: 'gateway',
