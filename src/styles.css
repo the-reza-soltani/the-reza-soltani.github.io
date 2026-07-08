@@ -203,33 +203,3 @@ a:hover {
     color: var(--foreground);
   }
 }
-
-@media print {
-  body {
-    background: white !important;
-    color: black !important;
-  }
-
-  .site-header,
-  .contact-cta,
-  .site-footer .back-to-top {
-    display: none;
-  }
-
-  .page-wrap {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .site-card {
-    box-shadow: none;
-    border: 1px solid #ddd;
-    break-inside: avoid;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-}

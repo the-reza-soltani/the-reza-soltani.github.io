@@ -1,6 +1,6 @@
 import { ArrowRight, BarChart3, Layers, Shield } from 'lucide-react'
 
-import { Badge } from '#/components/ui/badge'
+import { TechBadge } from '#/components/ui/tech-badge'
 import { resume } from '#/data/resume'
 import type { FeaturedProject } from '#/data/resume'
 
@@ -34,13 +34,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {project.technologies.map((tech) => (
-          <Badge
-            key={tech}
-            variant="outline"
-            className="border-[var(--border)] text-xs text-[var(--text-muted)]"
-          >
-            {tech}
-          </Badge>
+          <TechBadge key={tech} name={tech} />
         ))}
       </div>
       <a

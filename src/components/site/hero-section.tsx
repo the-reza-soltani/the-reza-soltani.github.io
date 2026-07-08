@@ -1,6 +1,8 @@
 import { ArrowRight } from 'lucide-react'
 
 import { ArchDiagram } from '#/components/site/arch-diagram'
+import { ResumeDownloadButton } from '#/components/site/resume-download-button'
+import { TechBadge } from '#/components/ui/tech-badge'
 import { Button } from '#/components/ui/button'
 import { resume } from '#/data/resume'
 
@@ -22,9 +24,7 @@ export function HeroSection() {
 
           <div className="mt-6 flex flex-wrap gap-2">
             {hero.techTags.map((tag) => (
-              <span key={tag} className="tech-tag">
-                {tag}
-              </span>
+              <TechBadge key={tag} name={tag} />
             ))}
           </div>
 
@@ -35,13 +35,7 @@ export function HeroSection() {
                 <ArrowRight className="size-4" />
               </a>
             </Button>
-            <Button
-              variant="outline"
-              className="outline-btn rounded-lg px-6 py-2.5"
-              onClick={() => window.print()}
-            >
-              Download Resume
-            </Button>
+            <ResumeDownloadButton variant="hero" />
           </div>
         </div>
 

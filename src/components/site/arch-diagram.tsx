@@ -1,88 +1,94 @@
-export function ArchDiagram() {
-  const nodeClass =
-    'fill-[var(--surface-elevated)] stroke-[var(--border-strong)]'
-  const textClass = 'fill-[var(--text-muted)] text-[9px]'
-  const labelClass = 'fill-[var(--text-primary)] text-[10px] font-medium'
-  const lineClass = 'stroke-[rgba(139,92,246,0.35)]'
-  const accentLine = 'stroke-[rgba(59,130,246,0.4)]'
+import { TechIcon } from '#/components/ui/tech-icon'
+import {
+  architectureDiagram,
+  type DiagramNode,
+} from '#/data/architecture-diagram'
+
+function DiagramNodeCard({ node, compact = false }: { node: DiagramNode; compact?: boolean }) {
+  const Icon = node.icon
 
   return (
-    <div className="site-card w-full overflow-hidden p-4">
-      <svg
-        viewBox="0 0 480 360"
-        className="h-auto w-full"
-        aria-label="Distributed system architecture diagram"
-        role="img"
+    <div
+      className={`flex items-center gap-2 rounded-lg border px-3 py-2 ${node.glow ? 'shadow-[0_0_20px_rgba(139,92,246,0.15)]' : ''}`}
+      style={{
+        borderColor: `${node.accent}55`,
+        backgroundColor: node.accentBg,
+      }}
+    >
+      <div
+        className="flex size-7 shrink-0 items-center justify-center rounded-md"
+        style={{ backgroundColor: `${node.accent}22` }}
       >
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+        {node.techName ? (
+          <TechIcon name={node.techName} size={compact ? 14 : 16} />
+        ) : Icon ? (
+          <Icon size={compact ? 14 : 16} style={{ color: node.accent }} />
+        ) : null}
+      </div>
+      <span
+        className={`font-medium text-[var(--text-primary)] ${compact ? 'text-[10px]' : 'text-xs'}`}
+      >
+        {node.label}
+      </span>
+    </div>
+  )
+}
 
-        {/* Users */}
-        <rect x="190" y="12" width="100" height="36" rx="8" className={nodeClass} />
-        <text x="240" y="34" textAnchor="middle" className={labelClass}>
-          Users
-        </text>
+function Connector({ className }: { className?: string }) {
+  return (
+    <div
+      className={`mx-auto h-6 w-px bg-gradient-to-b from-[rgba(139,92,246,0.5)] to-[rgba(59,130,246,0.3)] ${className ?? ''}`}
+    />
+  )
+}
 
-        <line x1="240" y1="48" x2="240" y2="72" className={lineClass} strokeWidth="1.5" />
+export function ArchDiagram() {
+  const { top, gateway, services, eventBus, dataStores } = architectureDiagram
 
-        {/* API Gateway */}
-        <rect x="165" y="72" width="150" height="40" rx="8" className={nodeClass} filter="url(#glow)" />
-        <text x="240" y="97" textAnchor="middle" className={labelClass}>
-          API Gateway
-        </text>
+  return (
+    <div className="site-card w-full p-5 md:p-6">
+      <div className="flex flex-col items-center">
+        <div className="w-full max-w-[140px]">
+          <DiagramNodeCard node={top} />
+        </div>
 
-        <line x1="240" y1="112" x2="240" y2="132" className={lineClass} strokeWidth="1.5" />
+        <Connector />
 
-        {/* Microservices row */}
-        {[
-          { x: 30, label: 'Auth' },
-          { x: 130, label: 'User' },
-          { x: 230, label: 'Billing' },
-          { x: 330, label: 'Notification' },
-        ].map(({ x, label }) => (
-          <g key={label}>
-            <line x1="240" y1="132" x2={x + 40} y2="148" className={lineClass} strokeWidth="1" />
-            <rect x={x} y="148" width="80" height="32" rx="6" className={nodeClass} />
-            <text x={x + 40} y="168" textAnchor="middle" className={textClass}>
-              {label}
-            </text>
-            <line x1={x + 40} y1="180" x2="240" y2="210" className={accentLine} strokeWidth="1" strokeDasharray="3 2" />
-          </g>
-        ))}
+        <div className="w-full max-w-[180px]">
+          <DiagramNodeCard node={gateway} />
+        </div>
 
-        {/* Event Bus */}
-        <rect x="140" y="210" width="200" height="36" rx="8" className={nodeClass} filter="url(#glow)" />
-        <text x="240" y="232" textAnchor="middle" className={labelClass}>
-          Event Bus (Kafka)
-        </text>
+        <Connector />
 
-        {/* Data stores */}
-        {[
-          { x: 50, label: 'Redis Cache' },
-          { x: 190, label: 'PostgreSQL' },
-          { x: 330, label: 'Object Storage' },
-        ].map(({ x, label }) => (
-          <g key={label}>
-            <line x1="240" y1="246" x2={x + 50} y2="268" className={accentLine} strokeWidth="1" />
-            <rect x={x} y="268" width="100" height="32" rx="6" className={nodeClass} />
-            <text x={x + 50} y="288" textAnchor="middle" className={textClass}>
-              {label}
-            </text>
-          </g>
-        ))}
+        <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-4">
+          {services.map((node) => (
+            <DiagramNodeCard key={node.id} node={node} compact />
+          ))}
+        </div>
 
-        {/* Decorative dots */}
-        <circle cx="460" cy="30" r="3" fill="rgba(139,92,246,0.5)" />
-        <circle cx="20" cy="300" r="2" fill="rgba(59,130,246,0.4)" />
-        <circle cx="450" cy="320" r="2" fill="rgba(139,92,246,0.3)" />
-      </svg>
+        <div className="relative my-1 flex h-8 w-full items-center justify-center">
+          <div className="absolute inset-x-[10%] top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(139,92,246,0.35)] to-transparent" />
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute top-1/2 h-6 w-px -translate-y-1/2 bg-gradient-to-b from-[rgba(139,92,246,0.4)] to-[rgba(59,130,246,0.2)]"
+              style={{ left: `${22 + i * 18}%` }}
+            />
+          ))}
+        </div>
+
+        <div className="w-full max-w-[220px]">
+          <DiagramNodeCard node={eventBus} />
+        </div>
+
+        <Connector />
+
+        <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
+          {dataStores.map((node) => (
+            <DiagramNodeCard key={node.id} node={node} compact />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

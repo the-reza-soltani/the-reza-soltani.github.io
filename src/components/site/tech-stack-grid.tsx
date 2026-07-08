@@ -1,3 +1,4 @@
+import { TechIcon } from '#/components/ui/tech-icon'
 import { resume } from '#/data/resume'
 
 const categoryLabels: Record<keyof typeof resume.skills, string> = {
@@ -9,16 +10,6 @@ const categoryLabels: Record<keyof typeof resume.skills, string> = {
   architecture: 'Architecture',
   others: 'Others',
 }
-
-const dotColors = [
-  'bg-purple-400',
-  'bg-blue-400',
-  'bg-emerald-400',
-  'bg-amber-400',
-  'bg-pink-400',
-  'bg-cyan-400',
-  'bg-orange-400',
-]
 
 export function TechStackGrid() {
   const entries = Object.entries(resume.skills) as [
@@ -33,20 +24,18 @@ export function TechStackGrid() {
         <h2 className="section-title mb-8">Technologies I work with</h2>
 
         <div className="site-card grid gap-8 p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {entries.map(([key, items], categoryIndex) => (
+          {entries.map(([key, items]) => (
             <div key={key}>
               <h3 className="mb-4 text-sm font-semibold text-[var(--text-primary)]">
                 {categoryLabels[key]}
               </h3>
               <ul className="space-y-2.5">
-                {items.map((skill, skillIndex) => (
+                {items.map((skill) => (
                   <li
                     key={skill}
                     className="flex items-center gap-2.5 text-sm text-[var(--text-muted)]"
                   >
-                    <span
-                      className={`size-2 shrink-0 rounded-full ${dotColors[(categoryIndex + skillIndex) % dotColors.length]}`}
-                    />
+                    <TechIcon name={skill} size={16} />
                     {skill}
                   </li>
                 ))}
