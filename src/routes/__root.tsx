@@ -18,7 +18,7 @@ interface MyRouterContext {
 }
 
 const siteUrl = 'https://soltanireza65.github.io'
-const description = resume.summary.slice(0, 160)
+const description = resume.hero.description
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
@@ -66,7 +66,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
