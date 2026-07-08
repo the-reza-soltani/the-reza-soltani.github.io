@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ResumePage } from '#/components/resume/resume-page'
+import { PortfolioPage } from '#/components/site/portfolio-page'
 
-export const Route = createFileRoute('/')({ component: ResumePage })
+export const Route = createFileRoute('/')({ component: PortfolioPage })

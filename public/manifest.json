@@ -1,8 +1,8 @@
 {
   "short_name": "Reza Soltani",
-  "name": "Reza Soltani — Software Engineer",
+  "name": "Reza Soltani — Backend Engineer",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#4fb8b2",
-  "background_color": "#e7f3ec"
+  "theme_color": "#0a0e1a",
+  "background_color": "#0a0e1a"
 }

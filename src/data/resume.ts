@@ -1,8 +1,10 @@
 export type ResumeExperience = {
+  slug: string
   company: string
   role: string
   period: string
   location: string
+  summary: string
   highlights: string[]
   technologies: string[]
 }
@@ -23,6 +25,21 @@ export type ResumeNavItem = {
   label: string
 }
 
+export type FeaturedProject = {
+  id: string
+  title: string
+  description: string
+  technologies: string[]
+  experienceAnchor: string
+  icon: 'layers' | 'chart' | 'shield'
+}
+
+export type SiteStat = {
+  value: string
+  label: string
+  icon?: 'calendar' | 'building' | 'globe' | 'code'
+}
+
 export const resume = {
   name: 'Reza Soltani',
   title: 'Software Engineer | Backend Specialist | Node.js & Distributed Systems',
@@ -31,56 +48,97 @@ export const resume = {
     linkedin: 'https://linkedin.com/in/reza-soltani',
     github: 'https://github.com/soltanireza65',
   },
-  summary:
-    'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices. Proven track record in optimizing system performance, building seamless backend services, and implementing CI/CD pipelines. Experienced with technologies like Node.js, NestJS, PostgreSQL, RabbitMQ, Redis, React.js, Next.js, and more. Strong leadership capabilities, with experience mentoring junior developers, fostering cross-functional collaboration, and driving continuous learning across teams. Adept at solving complex technical challenges, ensuring system scalability, and enhancing software reliability.',
-  skills: {
-    backend: ['Node.js', 'NestJS', 'Express.js', 'REST APIs', 'WebSockets'],
-    frontend: ['React.js', 'Next.js', 'Tanstack', 'Tailwind CSS'],
-    databases: ['PostgreSQL', 'MongoDB', 'Redis'],
-    architecture: [
-      'Microservices',
-      'Distributed Systems',
-      'DDD',
-      'CQRS',
-      'Event-Driven',
+  hero: {
+    label: 'Backend Engineer',
+    headline: 'Building scalable',
+    headlineAccent: 'distributed systems',
+    description:
+      'I design and build high-performance backend systems using Node.js, TypeScript, and modern architecture patterns like DDD, CQRS, and event-driven microservices.',
+    techTags: [
+      'Node.js',
+      'TypeScript',
+      'NestJS',
+      'PostgreSQL',
+      'Redis',
+      'Kafka',
+      'Docker',
+      'Kubernetes',
     ],
+  },
+  about: {
+    title: 'I build backend systems that scale.',
+    description:
+      'Senior Software Engineer with 8+ years of experience designing distributed systems, microservices, and high-traffic APIs. Passionate about clean architecture, performance optimization, and mentoring teams.',
+    educationNote:
+      "Master's Degree in Intelligent Simulator Design — University of Tabriz",
+  },
+  stats: [
+    { value: '8+', label: 'Years Experience', icon: 'calendar' },
+    { value: '5+', label: 'Companies', icon: 'building' },
+    { value: '100%', label: 'Remote', icon: 'globe' },
+    { value: 'Backend', label: 'Specialist', icon: 'code' },
+  ] satisfies SiteStat[],
+  featuredProjects: [
+    {
+      id: 'saas-platform',
+      title: 'Multi-tenant SaaS Platform',
+      description:
+        'Designed a multi-tenant SaaS backend using DDD and Hexagonal Architecture, with CQRS and event-driven patterns for high-concurrency workloads.',
+      technologies: ['NestJS', 'PostgreSQL', 'Kafka', 'Redis'],
+      experienceAnchor: 'daal',
+      icon: 'layers',
+    },
+    {
+      id: 'oms-trading',
+      title: 'Trading Platform (OMS)',
+      description:
+        'Built core features for an OMS trading platform and admin dashboard with clean domain boundaries, containerized deployments, and real-time data flows.',
+      technologies: ['Node.js', 'Kubernetes', 'PostgreSQL'],
+      experienceAnchor: 'xaniis',
+      icon: 'chart',
+    },
+    {
+      id: 'identity-service',
+      title: 'Identity Service',
+      description:
+        'Integrated LDAP, OIDC, and Keycloak for scalable authentication across multiple ownCloud instances with SCIM REST API endpoints.',
+      technologies: ['Keycloak', 'OIDC', 'TypeScript'],
+      experienceAnchor: 'ponder-source',
+      icon: 'shield',
+    },
+  ] satisfies FeaturedProject[],
+  summary:
+    'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices.',
+  skills: {
+    languages: ['TypeScript', 'JavaScript', 'Golang', 'Bash'],
+    backend: ['Node.js', 'NestJS', 'Express.js', 'WebSockets'],
+    databases: ['PostgreSQL', 'MongoDB', 'Redis'],
     messaging: ['RabbitMQ', 'Kafka'],
     devops: [
       'Docker',
       'Kubernetes',
       'Nginx',
-      'Caddy',
       'GitLab CI/CD',
-      'Github Actions',
+      'GitHub Actions',
     ],
-    performance: [
-      'Caching',
-      'Load Balancing',
-      'Reverse Proxy',
-      'Profiling',
+    architecture: [
+      'DDD',
+      'CQRS',
+      'Hexagonal',
+      'Microservices',
+      'Event-Driven',
     ],
-    testing: [
-      'Unit Testing',
-      'E2E Testing',
-      'API Security',
-      'OAuth',
-      'Keycloak',
-    ],
-    programming: [
-      'JavaScript',
-      'TypeScript',
-      'Golang',
-      'Bash',
-      'Linux',
-      'Git',
-    ],
+    others: ['Linux', 'Git', 'Unit Testing', 'E2E Testing', 'OAuth', 'Keycloak'],
   },
   experience: [
     {
+      slug: 'daal',
       company: 'Daal',
       role: 'Backend Developer',
       period: 'Feb 2024 – Present',
       location: 'Remote',
+      summary:
+        'Refactored high-traffic backend to Hexagonal Architecture and designed multi-tenant SaaS with CQRS and event-driven patterns.',
       highlights: [
         'Refactored a high-traffic backend codebase to Hexagonal Architecture, improving maintainability and scalability by 50%.',
         'Designed a multi-tenant SaaS backend using Domain-Driven Design for modular business logic.',
@@ -103,10 +161,13 @@ export const resume = {
       ],
     },
     {
+      slug: 'ponder-source',
       company: 'Stichting Ponder Source',
       role: 'Software Engineer',
       period: 'Jan 2023 – Feb 2024',
       location: 'Remote',
+      summary:
+        'Built identity integrations with Keycloak/OIDC and contributed to Solid Data Modules for interoperable RDF data.',
       highlights: [
         'Contributed to the Solid Data Modules project — modular JS/TS libraries for reading and writing Solid Pod data, enabling interoperability between RDF data formats.',
         'Integrated LDAP, OIDC, and Keycloak for scalable authentication across multiple ownCloud instances.',
@@ -118,10 +179,13 @@ export const resume = {
       technologies: ['Node.js', 'TypeScript', 'Nginx', 'Docker', 'Keycloak'],
     },
     {
+      slug: 'xaniis',
       company: 'Xaniis',
       role: 'Software Engineer',
       period: 'Feb 2021 – Feb 2023',
       location: 'Remote',
+      summary:
+        'Built OMS trading platform features with Hexagonal Architecture, Docker/Kubernetes deployments, and team mentorship.',
       highlights: [
         'Introduced and applied Hexagonal Architecture principles to establish clean boundaries between domains, resulting in more maintainable and testable services.',
         'Containerized applications and standardized deployment processes using Docker and Kubernetes, reducing release friction and improving operational consistency.',
@@ -140,10 +204,13 @@ export const resume = {
       ],
     },
     {
+      slug: 'tarnamagostar',
       company: 'Tarnamagostar',
       role: 'Backend Developer',
       period: 'Jun 2020 – Jan 2021',
       location: 'Remote',
+      summary:
+        'Architected NestJS microservices with RabbitMQ messaging, Redis caching, and GitLab CI/CD pipelines.',
       highlights: [
         'Architected scalable microservices with NestJS, supporting high-concurrency operations.',
         'Optimized inter-service communication using RabbitMQ, reducing latency by 30%.',
@@ -162,10 +229,13 @@ export const resume = {
       ],
     },
     {
+      slug: 'citek',
       company: 'CITEK',
       role: 'Backend Developer',
       period: 'Jan 2019 – May 2020',
       location: 'Remote',
+      summary:
+        'Built RESTful APIs for 5+ applications with RBAC, MongoDB optimization, and Docker containerization.',
       highlights: [
         'Built and deployed scalable RESTful APIs with Node.js & Express.js for 5+ applications.',
         'Improved backend performance by 40% through database indexing in MongoDB.',
@@ -184,16 +254,19 @@ export const resume = {
       ],
     },
     {
+      slug: 'freelance',
       company: 'Freelance',
       role: 'Software Developer',
       period: 'Jan 2017 – Dec 2018',
       location: 'Remote',
+      summary:
+        'Delivered backend features for e-commerce platforms, custom APIs, and full-stack client solutions.',
       highlights: [
         'Developed and maintained backend features for multiple e-commerce platforms, including custom APIs, payment integrations, and order processing workflows.',
         'Built custom WordPress plugins and optimized existing ones to improve performance, security, and maintainability.',
         'Designed reusable backend modules in Node.js and PHP, establishing early patterns in modular and layered architecture.',
         'Collaborated with clients to deliver full-stack solutions, including dashboards, admin panels, and automation tools.',
-        'Gained practical experience in system design, API development, Git workflows, and production deployments — forming the foundation for later work in distributed systems and microservices.',
+        'Gained practical experience in system design, API development, Git workflows, and production deployments.',
       ],
       technologies: [
         'Node.js',
@@ -211,11 +284,13 @@ export const resume = {
       name: 'Nestified',
       description:
         'A collection of high-quality NestJS utilities, modules, and tooling — crafted to make building backend applications faster, cleaner, and more maintainable.',
+      url: 'https://github.com/soltanireza65',
     },
     {
       name: 'Solid Data Modules',
       description:
         'Developed modular JavaScript code for reading and writing specific data types in Solid Pods, ensuring interoperability with diverse data formats.',
+      url: 'https://github.com/soltanireza65',
     },
   ] satisfies ResumeOssProject[],
   education: [
@@ -225,10 +300,10 @@ export const resume = {
     },
   ] satisfies ResumeEducation[],
   navigation: [
-    { id: 'summary', label: 'Summary' },
-    { id: 'skills', label: 'Skills' },
+    { id: 'about', label: 'About' },
     { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
     { id: 'oss', label: 'OSS' },
-    { id: 'education', label: 'Education' },
+    { id: 'contact', label: 'Contact' },
   ] satisfies ResumeNavItem[],
 }
