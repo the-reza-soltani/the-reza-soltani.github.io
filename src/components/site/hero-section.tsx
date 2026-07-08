@@ -28,6 +28,19 @@ export function HeroSection() {
             ))}
           </div>
 
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-[10px] font-medium uppercase tracking-widest text-[var(--text-muted)] opacity-70">
+              Also exploring
+            </span>
+            {hero.aiTechTags.map((tag) => (
+              <TechBadge
+                key={tag}
+                name={tag}
+                className="border-[rgba(34,211,238,0.15)] bg-[rgba(34,211,238,0.05)] text-[var(--text-muted)]"
+              />
+            ))}
+          </div>
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild className="gradient-btn rounded-lg px-6 py-2.5">
               <a href="#projects">

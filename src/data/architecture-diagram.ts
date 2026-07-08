@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import {
   Bell,
+  Brain,
   CreditCard,
   Server,
   Shield,
@@ -20,6 +21,14 @@ export type DiagramNode = {
 }
 
 export const architectureDiagram = {
+  aiServices: {
+    id: 'ai',
+    label: 'AI / ML Services',
+    icon: Brain,
+    accent: '#22d3ee',
+    accentBg: 'rgba(34, 211, 238, 0.12)',
+    glow: true,
+  } satisfies DiagramNode,
   top: {
     id: 'users',
     label: 'Users',

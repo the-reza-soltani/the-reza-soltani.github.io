@@ -20,6 +20,15 @@ export type ResumeEducation = {
   degree: string
 }
 
+export type AiInterestStatus = 'Learning' | 'Building' | 'Experimenting' | 'Exploring'
+
+export type AiInterestTopic = {
+  id: string
+  title: string
+  description: string
+  status: AiInterestStatus
+}
+
 export type ResumeNavItem = {
   id: string
   label: string
@@ -53,7 +62,7 @@ export const resume = {
     headline: 'Building scalable',
     headlineAccent: 'distributed systems',
     description:
-      'I design and build high-performance backend systems using Node.js, TypeScript, and modern architecture patterns like DDD, CQRS, and event-driven microservices.',
+      'I build scalable backend systems and distributed architectures with Node.js, TypeScript, and event-driven microservices — and I am passionate about modern AI and intelligent software systems.',
     techTags: [
       'Node.js',
       'TypeScript',
@@ -64,6 +73,7 @@ export const resume = {
       'Docker',
       'Kubernetes',
     ],
+    aiTechTags: ['Python', 'LLM APIs', 'LangChain', 'OpenAI API', 'Vector DBs'],
   },
   about: {
     title: 'I build backend systems that scale.',
@@ -107,6 +117,84 @@ export const resume = {
       icon: 'shield',
     },
   ] satisfies FeaturedProject[],
+  aiSection: {
+    label: 'AI & Intelligent Systems',
+    title: 'Expanding into AI — from a backend engineer\'s perspective',
+    description:
+      'My core expertise is backend and distributed systems. I am actively learning and building with modern AI tooling — applying the same engineering discipline I use for microservices to LLM applications, retrieval pipelines, and intelligent APIs.',
+    topics: [
+      {
+        id: 'llm-apps',
+        title: 'LLM Applications',
+        description:
+          'Designing production-minded apps that integrate large language models with reliable APIs, guardrails, and observability.',
+        status: 'Building',
+      },
+      {
+        id: 'agents',
+        title: 'AI Agents',
+        description:
+          'Exploring agent workflows, tool use, and orchestration patterns for automating complex backend tasks.',
+        status: 'Experimenting',
+      },
+      {
+        id: 'rag',
+        title: 'RAG',
+        description:
+          'Retrieval-augmented generation pipelines that connect domain knowledge to LLMs with clean data boundaries.',
+        status: 'Learning',
+      },
+      {
+        id: 'mcp',
+        title: 'MCP (Model Context Protocol)',
+        description:
+          'Investigating how MCP enables structured tool and context sharing between AI models and backend services.',
+        status: 'Exploring',
+      },
+      {
+        id: 'vector-db',
+        title: 'Vector Databases',
+        description:
+          'Embedding storage, similarity search, and indexing strategies for semantic retrieval at scale.',
+        status: 'Learning',
+      },
+      {
+        id: 'semantic-search',
+        title: 'Semantic Search',
+        description:
+          'Building search experiences powered by embeddings rather than keyword matching alone.',
+        status: 'Building',
+      },
+      {
+        id: 'ai-apis',
+        title: 'AI APIs',
+        description:
+          'Integrating OpenAI and other model providers into backend services with retries, caching, and cost control.',
+        status: 'Building',
+      },
+      {
+        id: 'prompt-eng',
+        title: 'Prompt Engineering',
+        description:
+          'Crafting reliable prompts, system instructions, and structured outputs for consistent model behavior.',
+        status: 'Learning',
+      },
+      {
+        id: 'ai-eval',
+        title: 'AI Evaluation',
+        description:
+          'Measuring output quality, latency, and regression risk as AI features evolve in production.',
+        status: 'Exploring',
+      },
+      {
+        id: 'ai-infra',
+        title: 'AI Infrastructure',
+        description:
+          'Connecting AI workloads to the same infra I already work with — containers, queues, caches, and CI/CD.',
+        status: 'Building',
+      },
+    ] satisfies AiInterestTopic[],
+  },
   summary:
     'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices.',
   skills: {
@@ -303,6 +391,7 @@ export const resume = {
     { id: 'about', label: 'About' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
+    { id: 'ai', label: 'AI' },
     { id: 'oss', label: 'OSS' },
     { id: 'contact', label: 'Contact' },
   ] satisfies ResumeNavItem[],

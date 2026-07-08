@@ -25,6 +25,8 @@ import {
   siPhp,
   siPostgresql,
   siPrisma,
+  siPython,
+  siLangchain,
   siRabbitmq,
   siReact,
   siRedis,
@@ -38,6 +40,7 @@ import type { SimpleIcon } from 'simple-icons'
 import {
   Blocks,
   Box,
+  Brain,
   Boxes,
   Cloud,
   Code2,
@@ -48,8 +51,10 @@ import {
   Lock,
   Network,
   Radio,
+  Search,
   Server,
   Shield,
+  Sparkles,
   TestTube,
   Workflow,
   Zap,
@@ -104,6 +109,8 @@ const SIMPLE_ICON_MAP: Record<string, SimpleIcon> = {
   'Object Storage': siMinio,
   'Amazon S3': siMinio,
   Vitest: siVitest,
+  Python: siPython,
+  LangChain: siLangchain,
 }
 
 const FALLBACK_MAP: Record<string, TechFallback> = {
@@ -138,6 +145,12 @@ const FALLBACK_MAP: Record<string, TechFallback> = {
   Winston: { type: 'lucide', icon: Code2, color: '#64748b' },
   Recoil: { type: 'lucide', icon: Boxes, color: '#61dafb' },
   RBAC: { type: 'lucide', icon: Lock, color: '#f59e0b' },
+  'LLM APIs': { type: 'lucide', icon: Sparkles, color: '#22d3ee' },
+  'OpenAI API': { type: 'lucide', icon: Sparkles, color: '#10b981' },
+  'Vector DBs': { type: 'lucide', icon: Database, color: '#f59e0b' },
+  'AI / ML Services': { type: 'lucide', icon: Brain, color: '#22d3ee' },
+  RAG: { type: 'lucide', icon: Search, color: '#8b5cf6' },
+  MCP: { type: 'lucide', icon: Network, color: '#a855f7' },
 }
 
 export function getTechIcon(name: string): TechIconData | null {
