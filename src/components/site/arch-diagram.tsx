@@ -7,6 +7,27 @@ import {
 const GRID_4 = 'grid w-full grid-cols-4 gap-2'
 const GRID_3 = 'grid w-full grid-cols-3 gap-2'
 
+type DiagramNodeCardProps = {
+  node: DiagramNode
+  compact?: boolean
+  className?: string
+}
+
+type ArrowHeadProps = {
+  x: number
+  y: number
+  size?: number
+}
+
+type StemHeightProps = {
+  height?: number
+}
+
+type RailSegmentProps = {
+  index: number
+  total: number
+}
+
 function nodeGlassStyle(node: DiagramNode) {
   const glowLayers = node.glow
     ? [
@@ -32,11 +53,7 @@ function DiagramNodeCard({
   node,
   compact = false,
   className = '',
-}: {
-  node: DiagramNode
-  compact?: boolean
-  className?: string
-}) {
+}: DiagramNodeCardProps) {
   const Icon = node.icon
 
   return (
@@ -69,7 +86,7 @@ function DiagramNodeCard({
   )
 }
 
-function ArrowHead({ x, y, size = 3.5 }: { x: number; y: number; size?: number }) {
+function ArrowHead({ x, y, size = 3.5 }: ArrowHeadProps) {
   return (
     <polygon
       className="diagram-wire-fill"
@@ -78,7 +95,7 @@ function ArrowHead({ x, y, size = 3.5 }: { x: number; y: number; size?: number }
   )
 }
 
-function CenterStem({ height = 10 }: { height?: number }) {
+function CenterStem({ height = 10 }: StemHeightProps) {
   return (
     <svg width="12" height={height} className="diagram-wire-glow mx-auto block shrink-0" aria-hidden>
       <line className="diagram-wire" x1="6" y1="0" x2="6" y2={height} />
@@ -86,7 +103,7 @@ function CenterStem({ height = 10 }: { height?: number }) {
   )
 }
 
-function DownArrow({ height = 22 }: { height?: number }) {
+function DownArrow({ height = 22 }: StemHeightProps) {
   const lineEnd = height - 8
 
   return (
@@ -97,7 +114,7 @@ function DownArrow({ height = 22 }: { height?: number }) {
   )
 }
 
-function RailSegment({ index, total }: { index: number; total: number }) {
+function RailSegment({ index, total }: RailSegmentProps) {
   const x1 = index === 0 ? '50%' : '0%'
   const x2 = index === total - 1 ? '50%' : '100%'
 
@@ -108,7 +125,7 @@ function RailSegment({ index, total }: { index: number; total: number }) {
   )
 }
 
-function VerticalArrow({ height = 28 }: { height?: number }) {
+function VerticalArrow({ height = 28 }: StemHeightProps) {
   return (
     <div className="flex justify-center">
       <DownArrow height={height} />

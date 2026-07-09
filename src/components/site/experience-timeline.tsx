@@ -3,7 +3,12 @@ import { useState } from 'react'
 
 import { TechBadge } from '#/components/ui/tech-badge'
 import { resume } from '#/data/resume'
+import type { ResumeExperience } from '#/data/resume'
 import { stripRichMarkers } from '#/lib/rich-text'
+
+type TimelineEntryProps = ResumeExperience & {
+  defaultExpanded?: boolean
+}
 
 function TimelineEntry({
   slug,
@@ -14,7 +19,7 @@ function TimelineEntry({
   highlights,
   technologies,
   defaultExpanded = false,
-}: (typeof resume.experience)[number] & { defaultExpanded?: boolean }) {
+}: TimelineEntryProps) {
   const [expanded, setExpanded] = useState(defaultExpanded)
 
   return (

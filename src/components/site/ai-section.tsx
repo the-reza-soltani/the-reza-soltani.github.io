@@ -15,7 +15,11 @@ const STATUS_STYLES: Record<AiInterestStatus, string> = {
     'border-amber-400/25 bg-amber-500/10 text-amber-300',
 }
 
-function StatusBadge({ status }: { status: AiInterestStatus }) {
+type StatusBadgeProps = {
+  status: AiInterestStatus
+}
+
+function StatusBadge({ status }: StatusBadgeProps) {
   return (
     <span
       className={`inline-flex shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${STATUS_STYLES[status]}`}

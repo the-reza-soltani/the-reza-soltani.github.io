@@ -12,7 +12,11 @@ const iconMap = {
   shield: Shield,
 }
 
-function FocusBadge({ badge }: { badge: AboutBadge }) {
+type FocusBadgeProps = {
+  badge: AboutBadge
+}
+
+function FocusBadge({ badge }: FocusBadgeProps) {
   const Icon = iconMap[badge.icon]
 
   return (

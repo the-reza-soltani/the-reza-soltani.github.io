@@ -16,7 +16,11 @@ const iconColors = {
   shield: 'bg-emerald-500/20 text-emerald-400',
 }
 
-function ProjectCard({ project }: { project: FeaturedProject }) {
+type ProjectCardProps = {
+  project: FeaturedProject
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
   const Icon = iconMap[project.icon]
 
   return (

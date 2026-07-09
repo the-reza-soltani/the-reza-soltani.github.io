@@ -64,7 +64,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   shellComponent: RootDocument,
 })
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+type RootDocumentProps = {
+  children: React.ReactNode
+}
+
+function RootDocument({ children }: RootDocumentProps) {
   return (
     <html lang="en" className="dark">
       <head>
