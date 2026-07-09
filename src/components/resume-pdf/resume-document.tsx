@@ -30,13 +30,14 @@ const styles = StyleSheet.create({
   },
   header: {
     // marginBottom: 22,
+    // lineHeight: 2,
   },
   name: {
     fontFamily: 'Oswald',
     fontSize: 24,
     color: heading,
     // marginBottom: 2,
-    // lineHeight: 1.5,
+    // lineHeight: 1.6,
   },
   headline: {
     fontFamily: 'Oswald',
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: body,
     // lineHeight: 1.45,
+    lineHeight: 1.6,
   },
   bodyBold: {
     fontFamily: 'SourceCodePro',
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceCodePro',
     fontSize: 9,
     color: dark,
-    // lineHeight: 1.3,
+    lineHeight: 1.4,
   },
   bulletBold: {
     fontFamily: 'SourceCodePro',
@@ -134,23 +136,6 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: body,
   },
-  bulletRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 4,
-  },
-
-  bulletMarker: {
-    width: 8,
-    fontSize: 8,
-    color: accent,
-    marginTop: 1,
-  },
-
-  bulletContent: {
-    flex: 1,
-    paddingLeft: 2,
-  },
   techLabel: {
     fontFamily: 'SourceCodePro',
     fontSize: 9,
@@ -164,7 +149,6 @@ const styles = StyleSheet.create({
   },
   techLine: {
     marginTop: 6,
-    marginLeft: 10,
     marginBottom: 2,
   },
   ossTitle: {
@@ -194,8 +178,29 @@ const styles = StyleSheet.create({
   },
   educationDegree: {
     fontFamily: 'SourceCodePro',
-    fontSize: 11,
+    fontSize: 9,
     color: education,
+  },
+  rule: {
+    borderBottom: '0.75pt solid #cccccc',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  bulletRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 3,
+  },
+  bulletDot: {
+    width: 3.5,
+    height: 3.5,
+    borderRadius: 2,
+    backgroundColor: dark,
+    marginTop: 3.5,
+    marginRight: 6,
+  },
+  bulletContent: {
+    flex: 1,
   },
 })
 
@@ -209,6 +214,21 @@ const skillLabels: Record<keyof typeof resume.skills, string> = {
   performance: 'Performance Optimization',
   testing: 'Testing & Security',
   programming: 'Programming',
+}
+
+type SectionBlockProps = {
+  title: string
+  children: ReactNode
+  wrap?: boolean
+  leadingRule?: boolean
+}
+
+type BulletItemProps = {
+  text: string
+}
+
+function HorizontalRule() {
+  return <View style={styles.rule} />
 }
 
 function ContactRow() {
@@ -232,22 +252,22 @@ function ContactRow() {
 function SectionBlock({
   title,
   children,
-}: {
-  title: string
-  children: ReactNode
-}) {
+  wrap = false,
+  leadingRule = false,
+}: SectionBlockProps) {
   return (
-    <View wrap={false} style={styles.section}>
+    <View wrap={wrap} style={styles.section}>
+      {leadingRule ? <HorizontalRule /> : null}
       <Text style={styles.sectionTitle}>{title}</Text>
       {children}
     </View>
   )
 }
 
-function BulletItem({ text }: { text: string }) {
+function BulletItem({ text }: BulletItemProps) {
   return (
     <View style={styles.bulletRow}>
-      <Text style={styles.bulletMarker}>-</Text>
+      <View style={styles.bulletDot} />
       <View style={styles.bulletContent}>
         <RichText text={text} style={styles.bulletText} boldStyle={styles.bulletBold} />
       </View>
@@ -265,8 +285,7 @@ export function ResumeDocument() {
           <ContactRow />
         </View>
 
-        {/* horizontal line */}
-        {/* <View style={{ borderBottom: '1px solid #000', marginHorizontal: -42, marginTop: 10, marginBottom: 10 }} /> */}
+        <HorizontalRule />
 
         <SectionBlock title="Summary">
           <View style={{ marginLeft: 14 }}>
@@ -278,8 +297,7 @@ export function ResumeDocument() {
           </View>
         </SectionBlock>
 
-        <SectionBlock title="Technical Skills">
-
+        <SectionBlock title="Technical Skills" leadingRule>
           <View style={{ marginLeft: 14 }}>
             {(Object.entries(resume.skills) as [keyof typeof resume.skills, string[]][]).map(
               ([key, items]) => (
@@ -295,10 +313,9 @@ export function ResumeDocument() {
           </View>
         </SectionBlock>
 
-        <View style={styles.section}>
-          <Text style={{ marginBottom: 4, fontFamily: 'Oswald', fontSize: 12, color: heading, fontWeight: 700 }}>Experience</Text>
+        <SectionBlock title="Experience" wrap leadingRule>
           {resume.experience.map((job) => (
-            <View key={job.slug} style={styles.job}>
+            <View key={job.slug} wrap={false} style={styles.job}>
               <Text style={{ marginBottom: 4 }}>
                 <Text style={styles.jobCompany}>{job.company} - </Text>
                 <Text style={styles.jobRole}>{job.role}</Text>
@@ -307,36 +324,44 @@ export function ResumeDocument() {
                   | {job.period} | {job.location}
                 </Text>
               </Text>
-              {job.highlights.map((highlight) => (
-                <BulletItem key={highlight} text={highlight} />
-              ))}
-              <Text style={styles.techLine}>
-                <Text style={styles.techLabel}>Technologies</Text>
-                <Text style={styles.techValue}>: {job.technologies.join(', ')}</Text>
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        <SectionBlock title="OSS">
-          {resume.oss.map((project) => (
-            <View key={project.name} style={{ marginBottom: 8 }}>
-              <Text style={styles.ossTitle}>{project.name}</Text>
-              <RichText
-                text={project.description}
-                style={styles.ossBody}
-                boldStyle={styles.ossBold}
-              />
+              <View style={{ marginLeft: 14 }}>
+                {job.highlights.map((highlight) => (
+                  <BulletItem key={highlight} text={highlight} />
+                ))}
+              </View>
+              <View style={{ marginLeft: 14 }}>
+                <Text style={styles.techLine}>
+                  <Text style={styles.techLabel}>Technologies</Text>
+                  <Text style={styles.techValue}>: {job.technologies.join(', ')}</Text>
+                </Text>
+              </View>
             </View>
           ))}
         </SectionBlock>
 
-        <SectionBlock title="Education">
+        <SectionBlock title="OSS" leadingRule>
+          {resume.oss.map((project) => (
+            <View key={project.name} style={{ marginBottom: 8 }}>
+              <Text style={styles.ossTitle}>{project.name}</Text>
+              <View style={{ marginLeft: 14 }}>
+                <RichText
+                  text={project.description}
+                  style={styles.ossBody}
+                  boldStyle={styles.ossBold}
+                />
+              </View>
+            </View>
+          ))}
+        </SectionBlock>
+
+        <SectionBlock title="Education" leadingRule>
           {resume.education.map((entry) => (
-            <Text key={entry.school}>
-              <Text style={styles.educationSchool}>{entry.school} </Text>
-              <Text style={styles.educationDegree}>— {entry.degree}</Text>
-            </Text>
+            <View key={entry.school} style={{ marginLeft: 14 }}>
+              <Text>
+                <Text style={styles.educationSchool}>{entry.school} </Text>
+                <Text style={styles.educationDegree}>— {entry.degree}</Text>
+              </Text>
+            </View>
           ))}
         </SectionBlock>
       </Page>
