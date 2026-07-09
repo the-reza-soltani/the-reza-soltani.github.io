@@ -9,6 +9,10 @@ import tailwindcss from '@tailwindcss/vite'
 const config = defineConfig({
   base: '/',
   resolve: { tsconfigPaths: true },
+  server: {
+    port: 5173,
+    open: true,
+  },
   plugins: [
     devtools(),
     tailwindcss(),
