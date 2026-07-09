@@ -1,3 +1,5 @@
+import { Moon } from 'lucide-react'
+
 import { ResumeDownloadButton } from '#/components/site/resume-download-button'
 import { resume } from '#/data/resume'
 
@@ -7,10 +9,13 @@ export function SiteHeader() {
       <div className="page-wrap grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4">
         <a
           href="#"
-          className="flex items-center font-semibold text-[var(--accent-purple)] no-underline"
+          className="flex items-center gap-2.5 font-semibold text-[var(--text-primary)] no-underline"
           aria-label="Home"
         >
-          &lt;/&gt;
+          <span className="flex size-8 items-center justify-center rounded-md bg-[var(--accent-primary)] text-xs font-bold text-[#050505]">
+            RS
+          </span>
+          <span className="hidden sm:inline">{resume.name}</span>
         </a>
 
         <nav className="hidden items-center justify-center gap-6 md:flex">
@@ -21,7 +26,15 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <ResumeDownloadButton />
+        <div className="flex items-center gap-2">
+          <span
+            className="hidden text-[var(--text-muted)] sm:inline-flex"
+            aria-hidden
+          >
+            <Moon className="size-4" />
+          </span>
+          <ResumeDownloadButton />
+        </div>
       </div>
     </header>
   )

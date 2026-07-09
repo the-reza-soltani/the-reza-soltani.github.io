@@ -59,10 +59,15 @@ export const resume = {
   },
   hero: {
     label: 'Backend Engineer',
-    headline: 'Building scalable',
-    headlineAccent: 'distributed systems',
+    headlineParts: [
+      { text: 'I design and build ', accent: false },
+      { text: 'scalable systems', accent: true },
+      { text: ' powered by ', accent: false },
+      { text: 'AI', accent: true },
+      { text: '.', accent: false },
+    ],
     description:
-      'I build scalable backend systems and distributed architectures with Node.js, TypeScript, and event-driven microservices — and I am passionate about modern AI and intelligent software systems.',
+      'Building modern backend systems and AI-powered solutions that are scalable, reliable, and impactful.',
     techTags: [
       'Node.js',
       'TypeScript',
@@ -85,6 +90,7 @@ export const resume = {
   stats: [
     { value: '8+', label: 'Years Experience', icon: 'calendar' },
     { value: '5+', label: 'Companies', icon: 'building' },
+    { value: '20+', label: 'Projects', icon: 'code' },
     { value: '100%', label: 'Remote', icon: 'globe' },
     { value: 'Backend', label: 'Specialist', icon: 'code' },
   ] satisfies SiteStat[],

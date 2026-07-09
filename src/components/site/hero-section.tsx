@@ -13,10 +13,20 @@ export function HeroSection() {
     <section className="hero-section page-wrap py-16 md:py-24">
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <div>
-          <p className="section-label mb-4">{hero.label}</p>
+          <p className="section-label mb-4 flex items-center gap-2">
+            <span className="inline-block size-1.5 rounded-full bg-[var(--accent-primary)]" />
+            {hero.label}
+          </p>
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)] md:text-5xl lg:text-[3.25rem]">
-            {hero.headline}{' '}
-            <span className="gradient-text">{hero.headlineAccent}</span>
+            {hero.headlineParts.map((part) =>
+              part.accent ? (
+                <span key={part.text} className="gradient-text">
+                  {part.text}
+                </span>
+              ) : (
+                <span key={part.text}>{part.text}</span>
+              ),
+            )}
           </h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--text-muted)]">
             {hero.description}
@@ -36,7 +46,7 @@ export function HeroSection() {
               <TechBadge
                 key={tag}
                 name={tag}
-                className="border-[rgba(34,211,238,0.15)] bg-[rgba(34,211,238,0.05)] text-[var(--text-muted)]"
+                className="border-[rgba(34,197,94,0.15)] bg-[rgba(34,197,94,0.05)] text-[var(--text-muted)]"
               />
             ))}
           </div>

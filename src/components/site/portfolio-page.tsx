@@ -1,10 +1,11 @@
 import { AboutSection } from '#/components/site/about-section'
-import { AiBackground } from '#/components/site/ai-background'
 import { AiSection } from '#/components/site/ai-section'
 import { ContactFooter } from '#/components/site/contact-footer'
-import { ExperienceAccordion } from '#/components/site/experience-accordion'
+import { CustomCursor } from '#/components/site/custom-cursor'
+import { ExperienceTimeline } from '#/components/site/experience-timeline'
 import { FeaturedProjects } from '#/components/site/featured-projects'
 import { HeroSection } from '#/components/site/hero-section'
+import { InfrastructureBackground } from '#/components/site/infrastructure-background'
 import { OssSection } from '#/components/site/oss-section'
 import { SiteHeader } from '#/components/site/site-header'
 import { TechStackGrid } from '#/components/site/tech-stack-grid'
@@ -12,11 +13,12 @@ import { TechStackGrid } from '#/components/site/tech-stack-grid'
 export function PortfolioPage() {
   return (
     <>
-      <AiBackground />
+      <InfrastructureBackground />
+      <CustomCursor />
       <SiteHeader />
       <HeroSection />
       <AboutSection />
-      <ExperienceAccordion />
+      <ExperienceTimeline />
       <FeaturedProjects />
       <AiSection />
       <TechStackGrid />

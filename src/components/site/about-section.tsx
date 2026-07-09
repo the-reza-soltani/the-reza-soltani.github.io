@@ -14,12 +14,14 @@ function StatCard({ stat }: { stat: SiteStat }) {
   const Icon = stat.icon ? iconMap[stat.icon] : null
 
   return (
-    <div className="site-card flex flex-col items-center justify-center p-6 text-center">
+    <div className="site-card flex flex-col items-center justify-center p-5 text-center">
       {Icon ? (
-        <Icon className="mb-3 size-5 text-[var(--accent-purple)]" />
+        <Icon className="mb-3 size-5 text-[var(--accent-primary)]" />
       ) : null}
-      <p className="text-3xl font-bold text-[var(--text-primary)]">{stat.value}</p>
-      <p className="mt-1 text-sm text-[var(--text-muted)]">{stat.label}</p>
+      <p className="text-2xl font-bold text-[var(--text-primary)] md:text-3xl">
+        {stat.value}
+      </p>
+      <p className="mt-1 text-xs text-[var(--text-muted)] md:text-sm">{stat.label}</p>
     </div>
   )
 }
@@ -40,7 +42,7 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
             {resume.stats.map((stat) => (
               <StatCard key={stat.label} stat={stat} />
             ))}

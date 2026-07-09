@@ -29,7 +29,7 @@ export function ContactFooter() {
           <Button
             asChild
             variant="outline"
-            className="outline-btn rounded-lg border-[var(--border-strong)]"
+            className="outline-btn rounded-lg"
           >
             <a href={resume.contact.github} target="_blank" rel="noopener noreferrer">
               <Github className="size-4" />
@@ -39,7 +39,7 @@ export function ContactFooter() {
           <Button
             asChild
             variant="outline"
-            className="outline-btn rounded-lg border-[var(--border-strong)]"
+            className="outline-btn rounded-lg"
           >
             <a href={resume.contact.linkedin} target="_blank" rel="noopener noreferrer">
               <Linkedin className="size-4" />
@@ -49,11 +49,11 @@ export function ContactFooter() {
           <Button
             asChild
             variant="outline"
-            className="outline-btn rounded-lg border-[var(--border-strong)]"
+            className="outline-btn rounded-lg"
           >
             <a href={`mailto:${resume.contact.email}`}>
               <Mail className="size-4" />
-              Email
+              Email Me
             </a>
           </Button>
         </div>
@@ -61,12 +61,12 @@ export function ContactFooter() {
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 text-sm text-[var(--text-muted)] md:flex-row">
           <p>© {new Date().getFullYear()} {resume.name}. All rights reserved.</p>
           <p className="text-center">
-            Built with TanStack Start, TypeScript &amp; Tailwind CSS
+            Built with TypeScript &amp; Tailwind CSS
           </p>
           <button
             type="button"
             onClick={scrollToTop}
-            className="back-to-top inline-flex items-center gap-1 text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
+            className="back-to-top inline-flex items-center gap-1 text-[var(--text-muted)] transition-colors hover:text-[var(--accent-primary)]"
           >
             Back to top
             <ArrowUp className="size-4" />

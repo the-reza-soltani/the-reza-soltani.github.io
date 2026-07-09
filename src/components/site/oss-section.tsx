@@ -23,7 +23,7 @@ export function OssSection() {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent-purple)] no-underline hover:text-[var(--accent-blue)]"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent-primary)] no-underline hover:text-[var(--accent-muted)]"
                 >
                   <Github className="size-4" />
                   GitHub Repository

@@ -39,8 +39,8 @@ export function AiSection() {
               {aiSection.description}
             </p>
           </div>
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(139,92,246,0.2)] bg-[rgba(139,92,246,0.08)]">
-            <BrainCircuit className="size-6 text-[var(--accent-purple)]" />
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(34,197,94,0.2)] bg-[rgba(34,197,94,0.08)]">
+            <BrainCircuit className="size-6 text-[var(--accent-primary)]" />
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export function AiSection() {
             <TechBadge
               key={tag}
               name={tag}
-              className="border-[rgba(139,92,246,0.15)] bg-[rgba(139,92,246,0.06)]"
+              className="border-[rgba(34,197,94,0.15)] bg-[rgba(34,197,94,0.06)]"
             />
           ))}
         </div>

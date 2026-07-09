@@ -39,7 +39,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
       </div>
       <a
         href={`#experience-${project.experienceAnchor}`}
-        className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[var(--accent-purple)] no-underline hover:text-[var(--accent-blue)]"
+        className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[var(--accent-primary)] no-underline hover:text-[var(--accent-muted)]"
       >
         View Details
         <ArrowRight className="size-4" />
