@@ -25,24 +25,25 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceCodePro',
     fontSize: 9,
     color: body,
-    lineHeight: 1.35,
+    // lineHeight: 1.6,
     backgroundColor: '#ffffff',
   },
   header: {
-    marginBottom: 22,
+    // marginBottom: 22,
   },
   name: {
     fontFamily: 'Oswald',
     fontSize: 24,
     color: heading,
-    marginBottom: 2,
+    // marginBottom: 2,
+    // lineHeight: 1.5,
   },
   headline: {
     fontFamily: 'Oswald',
     fontSize: 14,
     color: dark,
-    marginBottom: 8,
-    lineHeight: 1.25,
+    // marginBottom: 8,
+    // lineHeight: 1,
   },
   contactRow: {
     flexDirection: 'row',
@@ -59,10 +60,10 @@ const styles = StyleSheet.create({
     fontFamily: 'RobotoCondensed',
     fontSize: 9,
     color: dark,
-    marginHorizontal: 5,
+    marginHorizontal: 3,
   },
   section: {
-    marginTop: 22,
+    marginTop: 18,
   },
   sectionTitle: {
     fontFamily: 'Oswald',
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceCodePro',
     fontSize: 9,
     color: body,
-    lineHeight: 1.45,
+    // lineHeight: 1.45,
   },
   bodyBold: {
     fontFamily: 'SourceCodePro',
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceCodePro',
     fontSize: 9,
     color: dark,
-    lineHeight: 1.4,
+    // lineHeight: 1.3,
   },
   bulletBold: {
     fontFamily: 'SourceCodePro',
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   job: {
-    marginBottom: 12,
+    marginBottom: 18,
   },
   jobCompany: {
     fontFamily: 'SourceCodePro',
@@ -136,17 +137,19 @@ const styles = StyleSheet.create({
   bulletRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 2,
+    marginBottom: 4,
   },
+
   bulletMarker: {
-    width: 11,
-    fontFamily: 'Helvetica',
-    fontSize: 9,
-    color: dark,
-    lineHeight: 1.4,
+    width: 8,
+    fontSize: 8,
+    color: accent,
+    marginTop: 1,
   },
+
   bulletContent: {
     flex: 1,
+    paddingLeft: 2,
   },
   techLabel: {
     fontFamily: 'SourceCodePro',
@@ -160,8 +163,9 @@ const styles = StyleSheet.create({
     color: dark,
   },
   techLine: {
-    marginTop: 4,
-    lineHeight: 1.4,
+    marginTop: 6,
+    marginLeft: 10,
+    marginBottom: 2,
   },
   ossTitle: {
     fontFamily: 'SourceCodePro',
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceCodePro',
     fontSize: 9,
     color: body,
-    lineHeight: 1.45,
+    // lineHeight: 1.45,
   },
   ossBold: {
     fontFamily: 'SourceCodePro',
@@ -243,7 +247,7 @@ function SectionBlock({
 function BulletItem({ text }: { text: string }) {
   return (
     <View style={styles.bulletRow}>
-      <Text style={styles.bulletMarker}>●</Text>
+      <Text style={styles.bulletMarker}>-</Text>
       <View style={styles.bulletContent}>
         <RichText text={text} style={styles.bulletText} boldStyle={styles.bulletBold} />
       </View>
@@ -261,32 +265,40 @@ export function ResumeDocument() {
           <ContactRow />
         </View>
 
+        {/* horizontal line */}
+        {/* <View style={{ borderBottom: '1px solid #000', marginHorizontal: -42, marginTop: 10, marginBottom: 10 }} /> */}
+
         <SectionBlock title="Summary">
-          <RichText
-            text={resume.summary}
-            style={styles.bodyText}
-            boldStyle={styles.bodyBold}
-          />
+          <View style={{ marginLeft: 14 }}>
+            <RichText
+              text={resume.summary}
+              style={styles.bodyText}
+              boldStyle={styles.bodyBold}
+            />
+          </View>
         </SectionBlock>
 
         <SectionBlock title="Technical Skills">
-          {(Object.entries(resume.skills) as [keyof typeof resume.skills, string[]][]).map(
-            ([key, items]) => (
-              <View key={key} style={styles.skillLine}>
-                <Text>
-                  <Text style={styles.skillLabel}>{skillLabels[key]}</Text>
-                  <Text style={styles.skillColon}>: </Text>
-                  <Text style={styles.skillValue}>{items.join(', ')}</Text>
-                </Text>
-              </View>
-            ),
-          )}
+
+          <View style={{ marginLeft: 14 }}>
+            {(Object.entries(resume.skills) as [keyof typeof resume.skills, string[]][]).map(
+              ([key, items]) => (
+                <View key={key} style={styles.skillLine}>
+                  <Text>
+                    <Text style={styles.skillLabel}>{skillLabels[key]}</Text>
+                    <Text style={styles.skillColon}>: </Text>
+                    <Text style={styles.skillValue}>{items.join(', ')}</Text>
+                  </Text>
+                </View>
+              ),
+            )}
+          </View>
         </SectionBlock>
 
         <View style={styles.section}>
-          {resume.experience.map((job, index) => (
-            <View key={job.slug} wrap={false} style={styles.job}>
-              {index === 0 ? <Text style={styles.sectionTitle}>Experience</Text> : null}
+          <Text style={{ marginBottom: 4, fontFamily: 'Oswald', fontSize: 12, color: heading, fontWeight: 700 }}>Experience</Text>
+          {resume.experience.map((job) => (
+            <View key={job.slug} style={styles.job}>
               <Text style={{ marginBottom: 4 }}>
                 <Text style={styles.jobCompany}>{job.company} - </Text>
                 <Text style={styles.jobRole}>{job.role}</Text>
