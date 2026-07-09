@@ -1,6 +1,7 @@
 import { ArrowUpRight, Github } from 'lucide-react'
 
 import { resume } from '#/data/resume'
+import { stripRichMarkers } from '#/lib/rich-text'
 
 export function OssSection() {
   return (
@@ -16,7 +17,7 @@ export function OssSection() {
                 {project.name}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                {project.description}
+                {stripRichMarkers(project.description)}
               </p>
               {project.url ? (
                 <a

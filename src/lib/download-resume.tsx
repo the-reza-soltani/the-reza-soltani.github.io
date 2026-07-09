@@ -1,12 +1,15 @@
 import { createElement } from 'react'
 
 import { resume } from '#/data/resume'
+import { registerResumeFonts } from '#/lib/register-resume-fonts'
 
 export async function downloadResumePdf() {
   const [{ pdf }, { ResumeDocument }] = await Promise.all([
     import('@react-pdf/renderer'),
     import('#/components/resume-pdf/resume-document'),
   ])
+
+  registerResumeFonts()
 
   const blob = await pdf(createElement(ResumeDocument)).toBlob()
   const url = URL.createObjectURL(blob)

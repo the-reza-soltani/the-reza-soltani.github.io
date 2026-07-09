@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 import {
   Document,
-  Font,
   Link,
   Page,
   StyleSheet,
@@ -9,41 +8,41 @@ import {
   View,
 } from '@react-pdf/renderer'
 
+import { RichText } from '#/components/resume-pdf/rich-text'
 import { resume } from '#/data/resume'
 
-Font.registerHyphenationCallback((word) => [word])
-
-const ink = '#000000'
-const body = '#333333'
-const muted = '#555555'
-const border = '#cccccc'
-const link = '#1155cc'
+const accent = '#e91d63'
+const heading = '#424242'
+const dark = '#2a2a2e'
+const body = '#666666'
+const education = '#2e4440'
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
-    fontSize: 10,
-    fontFamily: 'Helvetica',
-    color: ink,
-    lineHeight: 1.45,
+    paddingTop: 42,
+    paddingBottom: 42,
+    paddingHorizontal: 42,
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: body,
+    lineHeight: 1.35,
     backgroundColor: '#ffffff',
   },
   header: {
-    marginBottom: 14,
-    borderBottom: `1pt solid ${border}`,
-    paddingBottom: 12,
+    marginBottom: 22,
   },
   name: {
-    fontSize: 22,
-    fontFamily: 'Helvetica-Bold',
-    color: ink,
-    marginBottom: 4,
+    fontFamily: 'Oswald',
+    fontSize: 24,
+    color: heading,
+    marginBottom: 2,
   },
-  title: {
-    fontSize: 11,
-    fontFamily: 'Helvetica',
-    color: muted,
+  headline: {
+    fontFamily: 'Oswald',
+    fontSize: 14,
+    color: dark,
     marginBottom: 8,
+    lineHeight: 1.25,
   },
   contactRow: {
     flexDirection: 'row',
@@ -51,80 +50,148 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contactLink: {
+    fontFamily: 'RobotoCondensed',
     fontSize: 9,
-    fontFamily: 'Helvetica',
-    color: link,
+    color: accent,
     textDecoration: 'none',
   },
   contactSep: {
+    fontFamily: 'RobotoCondensed',
     fontSize: 9,
-    fontFamily: 'Helvetica',
-    color: body,
-    marginHorizontal: 6,
+    color: dark,
+    marginHorizontal: 5,
   },
   section: {
-    marginTop: 14,
+    marginTop: 22,
   },
   sectionTitle: {
+    fontFamily: 'Oswald',
     fontSize: 12,
-    fontFamily: 'Helvetica-Bold',
-    color: ink,
-    marginBottom: 6,
+    color: heading,
+    marginBottom: 8,
   },
-  paragraph: {
-    fontSize: 10,
-    fontFamily: 'Helvetica',
+  bodyText: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
     color: body,
     lineHeight: 1.45,
   },
-  skillLine: {
+  bodyBold: {
+    fontFamily: 'SourceCodePro',
     fontSize: 9,
-    fontFamily: 'Helvetica',
     color: body,
-    marginBottom: 4,
+    fontWeight: 700,
+  },
+  bulletText: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: dark,
     lineHeight: 1.4,
+  },
+  bulletBold: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: dark,
+    fontWeight: 700,
   },
   skillLabel: {
-    fontFamily: 'Helvetica-Bold',
-    color: ink,
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: body,
+    fontWeight: 700,
+  },
+  skillColon: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: dark,
+  },
+  skillValue: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: body,
+  },
+  skillLine: {
+    marginBottom: 3,
   },
   job: {
-    marginBottom: 10,
+    marginBottom: 12,
   },
-  jobLine: {
-    fontFamily: 'Helvetica-Bold',
-    fontSize: 10,
-    color: ink,
-    marginBottom: 4,
+  jobCompany: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 11,
+    color: accent,
+    fontWeight: 700,
   },
-  bullet: {
-    fontSize: 9,
-    fontFamily: 'Helvetica',
+  jobRole: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 11,
     color: body,
+    fontWeight: 700,
+  },
+  jobMeta: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: body,
+  },
+  bulletRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     marginBottom: 2,
-    paddingLeft: 2,
+  },
+  bulletMarker: {
+    width: 11,
+    fontFamily: 'Helvetica',
+    fontSize: 9,
+    color: dark,
     lineHeight: 1.4,
   },
-  technologies: {
+  bulletContent: {
+    flex: 1,
+  },
+  techLabel: {
+    fontFamily: 'SourceCodePro',
     fontSize: 9,
-    fontFamily: 'Helvetica',
-    color: body,
+    color: dark,
+    fontWeight: 700,
+  },
+  techValue: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: dark,
+  },
+  techLine: {
     marginTop: 4,
     lineHeight: 1.4,
   },
-  ossItem: {
-    marginBottom: 8,
-  },
   ossTitle: {
-    fontFamily: 'Helvetica-Bold',
-    fontSize: 10,
-    color: ink,
+    fontFamily: 'SourceCodePro',
+    fontSize: 11,
+    color: accent,
+    fontWeight: 700,
     marginBottom: 2,
   },
-  educationLine: {
-    fontSize: 10,
-    fontFamily: 'Helvetica',
+  ossBody: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
     color: body,
+    lineHeight: 1.45,
+  },
+  ossBold: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 9,
+    color: body,
+    fontWeight: 700,
+  },
+  educationSchool: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 11,
+    color: accent,
+    fontWeight: 700,
+  },
+  educationDegree: {
+    fontFamily: 'SourceCodePro',
+    fontSize: 11,
+    color: education,
   },
 })
 
@@ -173,27 +240,45 @@ function SectionBlock({
   )
 }
 
+function BulletItem({ text }: { text: string }) {
+  return (
+    <View style={styles.bulletRow}>
+      <Text style={styles.bulletMarker}>●</Text>
+      <View style={styles.bulletContent}>
+        <RichText text={text} style={styles.bulletText} boldStyle={styles.bulletBold} />
+      </View>
+    </View>
+  )
+}
+
 export function ResumeDocument() {
   return (
     <Document title={`${resume.name} — Resume`} author={resume.name}>
       <Page size="A4" style={styles.page}>
         <View wrap={false} style={styles.header}>
           <Text style={styles.name}>{resume.name}</Text>
-          <Text style={styles.title}>{resume.title}</Text>
+          <Text style={styles.headline}>{resume.title}</Text>
           <ContactRow />
         </View>
 
         <SectionBlock title="Summary">
-          <Text style={styles.paragraph}>{resume.summary}</Text>
+          <RichText
+            text={resume.summary}
+            style={styles.bodyText}
+            boldStyle={styles.bodyBold}
+          />
         </SectionBlock>
 
         <SectionBlock title="Technical Skills">
           {(Object.entries(resume.skills) as [keyof typeof resume.skills, string[]][]).map(
             ([key, items]) => (
-              <Text key={key} style={styles.skillLine}>
-                <Text style={styles.skillLabel}>{skillLabels[key]}: </Text>
-                {items.join(', ')}
-              </Text>
+              <View key={key} style={styles.skillLine}>
+                <Text>
+                  <Text style={styles.skillLabel}>{skillLabels[key]}</Text>
+                  <Text style={styles.skillColon}>: </Text>
+                  <Text style={styles.skillValue}>{items.join(', ')}</Text>
+                </Text>
+              </View>
             ),
           )}
         </SectionBlock>
@@ -201,19 +286,21 @@ export function ResumeDocument() {
         <View style={styles.section}>
           {resume.experience.map((job, index) => (
             <View key={job.slug} wrap={false} style={styles.job}>
-              {index === 0 ? (
-                <Text style={styles.sectionTitle}>Experience</Text>
-              ) : null}
-              <Text style={styles.jobLine}>
-                {job.company} - {job.role} | {job.period} | {job.location}
+              {index === 0 ? <Text style={styles.sectionTitle}>Experience</Text> : null}
+              <Text style={{ marginBottom: 4 }}>
+                <Text style={styles.jobCompany}>{job.company} - </Text>
+                <Text style={styles.jobRole}>{job.role}</Text>
+                <Text style={styles.jobMeta}>
+                  {' '}
+                  | {job.period} | {job.location}
+                </Text>
               </Text>
               {job.highlights.map((highlight) => (
-                <Text key={highlight} style={styles.bullet}>
-                  ● {highlight}
-                </Text>
+                <BulletItem key={highlight} text={highlight} />
               ))}
-              <Text style={styles.technologies}>
-                Technologies: {job.technologies.join(', ')}
+              <Text style={styles.techLine}>
+                <Text style={styles.techLabel}>Technologies</Text>
+                <Text style={styles.techValue}>: {job.technologies.join(', ')}</Text>
               </Text>
             </View>
           ))}
@@ -221,17 +308,22 @@ export function ResumeDocument() {
 
         <SectionBlock title="OSS">
           {resume.oss.map((project) => (
-            <View key={project.name} style={styles.ossItem}>
+            <View key={project.name} style={{ marginBottom: 8 }}>
               <Text style={styles.ossTitle}>{project.name}</Text>
-              <Text style={styles.paragraph}>{project.description}</Text>
+              <RichText
+                text={project.description}
+                style={styles.ossBody}
+                boldStyle={styles.ossBold}
+              />
             </View>
           ))}
         </SectionBlock>
 
         <SectionBlock title="Education">
           {resume.education.map((entry) => (
-            <Text key={entry.school} style={styles.educationLine}>
-              {entry.school} — {entry.degree}
+            <Text key={entry.school}>
+              <Text style={styles.educationSchool}>{entry.school} </Text>
+              <Text style={styles.educationDegree}>— {entry.degree}</Text>
             </Text>
           ))}
         </SectionBlock>

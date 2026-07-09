@@ -88,7 +88,7 @@ const SIMPLE_ICON_MAP: Record<string, SimpleIcon> = {
   Nginx: siNginx,
   Caddy: siCaddy,
   'GitLab CI/CD': siGitlab,
-  'GitHub Actions': siGithubactions,
+  'Github Actions': siGithubactions,
   Golang: siGo,
   Bash: siGnubash,
   Linux: siLinux,

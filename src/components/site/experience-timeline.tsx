@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { TechBadge } from '#/components/ui/tech-badge'
 import { resume } from '#/data/resume'
+import { stripRichMarkers } from '#/lib/rich-text'
 
 function TimelineEntry({
   slug,
@@ -53,7 +54,7 @@ function TimelineEntry({
           <div className="mt-4 border-t border-[var(--border)] pt-4">
             <ul className="list-disc space-y-2 pl-5 text-sm text-[var(--text-muted)]">
               {highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
+                <li key={highlight}>{stripRichMarkers(highlight)}</li>
               ))}
             </ul>
             <div className="mt-4 flex flex-wrap gap-2">

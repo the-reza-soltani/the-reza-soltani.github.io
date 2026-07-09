@@ -1,27 +1,26 @@
-import { Building2, Calendar, Code2, Globe } from 'lucide-react'
+import { Boxes, Globe, Layers, Network, Shield, Zap } from 'lucide-react'
 
 import { resume } from '#/data/resume'
-import type { SiteStat } from '#/data/resume'
+import type { AboutBadge } from '#/data/resume'
 
 const iconMap = {
-  calendar: Calendar,
-  building: Building2,
+  network: Network,
+  layers: Layers,
+  zap: Zap,
+  boxes: Boxes,
   globe: Globe,
-  code: Code2,
+  shield: Shield,
 }
 
-function StatCard({ stat }: { stat: SiteStat }) {
-  const Icon = stat.icon ? iconMap[stat.icon] : null
+function FocusBadge({ badge }: { badge: AboutBadge }) {
+  const Icon = iconMap[badge.icon]
 
   return (
-    <div className="site-card flex flex-col items-center justify-center p-5 text-center">
-      {Icon ? (
-        <Icon className="mb-3 size-5 text-[var(--accent-primary)]" />
-      ) : null}
-      <p className="text-2xl font-bold text-[var(--text-primary)] md:text-3xl">
-        {stat.value}
-      </p>
-      <p className="mt-1 text-xs text-[var(--text-muted)] md:text-sm">{stat.label}</p>
+    <div className="site-card flex items-center gap-3 p-4">
+      <Icon className="size-4 shrink-0 text-[var(--accent-primary)]" />
+      <span className="text-sm font-medium leading-snug text-[var(--text-primary)]">
+        {badge.label}
+      </span>
     </div>
   )
 }
@@ -42,9 +41,9 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-            {resume.stats.map((stat) => (
-              <StatCard key={stat.label} stat={stat} />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {resume.about.badges.map((badge) => (
+              <FocusBadge key={badge.label} badge={badge} />
             ))}
           </div>
         </div>
