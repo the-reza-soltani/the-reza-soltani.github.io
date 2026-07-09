@@ -52,9 +52,9 @@ export const resume = {
   name: 'Reza Soltani',
   title: 'Software Engineer | Backend Specialist | Node.js & Distributed Systems',
   contact: {
-    email: 'soltanireza65@gmail.com',
+    email: 'itsrezasoltani@gmail.com',
     linkedin: 'https://linkedin.com/in/reza-soltani',
-    github: 'https://github.com/soltanireza65',
+    github: 'https://github.com/itsrezasoltani',
   },
   hero: {
     label: 'Backend Engineer',
@@ -392,13 +392,13 @@ export const resume = {
       name: 'Nestified',
       description:
         'A collection of high-quality **NestJS** utilities, modules, and tooling — crafted to make building backend applications faster, cleaner, and more maintainable.',
-      url: 'https://github.com/soltanireza65',
+      url: 'https://github.com/itsrezasoltani',
     },
     {
       name: 'Solid Data Modules',
       description:
         'Developed modular JavaScript code for reading and writing specific data types in Solid Pods, ensuring interoperability with diverse data formats.',
-      url: 'https://github.com/soltanireza65',
+      url: 'https://github.com/itsrezasoltani',
     },
   ] satisfies ResumeOssProject[],
   education: [

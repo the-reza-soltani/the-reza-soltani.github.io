@@ -1,6 +1,6 @@
 Reza Soltani
 Software Engineer | Backend Specialist | Node.js & Distributed Systems
-LinkedIn |  GitHub | soltanireza65@gmail.com
+LinkedIn |  GitHub | itsrezasoltani@gmail.com
 
 Summary
 Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices. Proven track record in optimizing system performance, building seamless backend services, and implementing CI/CD pipelines. Experienced with technologies like Node.js, NestJS, PostgreSQL, RabbitMQ, Redis, React.js, Next.js, and more. Strong leadership capabilities, with experience mentoring junior developers, fostering cross-functional collaboration, and driving continuous learning across teams. Adept at solving complex technical challenges, ensuring system scalability, and enhancing software reliability.

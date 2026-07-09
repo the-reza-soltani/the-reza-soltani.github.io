@@ -17,7 +17,7 @@ interface MyRouterContext {
   queryClient: QueryClient
 }
 
-const siteUrl = 'https://soltanireza65.github.io'
+const siteUrl = 'https://itsrezasoltani.github.io'
 const description = resume.hero.description
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
