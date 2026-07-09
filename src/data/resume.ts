@@ -83,7 +83,7 @@ export const resume = {
   about: {
     title: 'I build backend systems that scale.',
     description:
-      'Senior Software Engineer with 8+ years of experience designing distributed systems, microservices, and high-traffic APIs. Passionate about clean architecture, performance optimization, and mentoring teams.',
+      'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing scalable, maintainable, and high-performance solutions using DDD, Hexagonal Architecture, and Microservices.',
     educationNote:
       "Master's Degree in Intelligent Simulator Design — University of Tabriz",
   },
@@ -202,27 +202,41 @@ export const resume = {
     ] satisfies AiInterestTopic[],
   },
   summary:
-    'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices.',
+    'Highly skilled Senior Software Engineer, specializing in backend development and system architecture. Expertise in designing and implementing scalable, maintainable, and high-performance solutions using modern software engineering practices such as Domain-Driven Design (DDD), Hexagonal Architecture, and Microservices. Proven track record in optimizing system performance, building seamless backend services, and implementing CI/CD pipelines. Experienced with technologies like Node.js, NestJS, PostgreSQL, RabbitMQ, Redis, React.js, Next.js, and more. Strong leadership capabilities, with experience mentoring junior developers, fostering cross-functional collaboration, and driving continuous learning across teams. Adept at solving complex technical challenges, ensuring system scalability, and enhancing software reliability.',
   skills: {
-    languages: ['TypeScript', 'JavaScript', 'Golang', 'Bash'],
-    backend: ['Node.js', 'NestJS', 'Express.js', 'WebSockets'],
+    backend: ['Node.js', 'NestJS', 'Express.js', 'REST APIs', 'WebSockets'],
+    frontend: ['React.js', 'Next.js', 'Tanstack', 'Tailwind CSS'],
     databases: ['PostgreSQL', 'MongoDB', 'Redis'],
+    architecture: [
+      'Microservices',
+      'Distributed Systems',
+      'DDD',
+      'CQRS',
+      'Event-Driven',
+    ],
     messaging: ['RabbitMQ', 'Kafka'],
     devops: [
       'Docker',
       'Kubernetes',
       'Nginx',
+      'Caddy',
       'GitLab CI/CD',
       'GitHub Actions',
     ],
-    architecture: [
-      'DDD',
-      'CQRS',
-      'Hexagonal',
-      'Microservices',
-      'Event-Driven',
+    performance: [
+      'Caching',
+      'Load Balancing',
+      'Reverse Proxy',
+      'Profiling',
     ],
-    others: ['Linux', 'Git', 'Unit Testing', 'E2E Testing', 'OAuth', 'Keycloak'],
+    testing: [
+      'Unit Testing',
+      'E2E Testing',
+      'API Security',
+      'OAuth',
+      'Keycloak',
+    ],
+    programming: ['JavaScript', 'TypeScript', 'Golang', 'Bash', 'Linux', 'Git'],
   },
   experience: [
     {
@@ -360,7 +374,7 @@ export const resume = {
         'Built custom WordPress plugins and optimized existing ones to improve performance, security, and maintainability.',
         'Designed reusable backend modules in Node.js and PHP, establishing early patterns in modular and layered architecture.',
         'Collaborated with clients to deliver full-stack solutions, including dashboards, admin panels, and automation tools.',
-        'Gained practical experience in system design, API development, Git workflows, and production deployments.',
+        'Gained practical experience in system design, API development, Git workflows, and production deployments — forming the foundation for later work in distributed systems and microservices.',
       ],
       technologies: [
         'Node.js',

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import {
   Document,
   Font,
@@ -10,38 +11,56 @@ import {
 
 import { resume } from '#/data/resume'
 
+Font.registerHyphenationCallback((word) => [word])
+
+const ink = '#000000'
+const body = '#333333'
+const muted = '#555555'
+const border = '#cccccc'
+const link = '#1155cc'
+
 const styles = StyleSheet.create({
   page: {
     padding: 40,
     fontSize: 10,
     fontFamily: 'Helvetica',
-    color: '#111827',
+    color: ink,
     lineHeight: 1.45,
+    backgroundColor: '#ffffff',
   },
   header: {
     marginBottom: 14,
-    borderBottom: '1pt solid #e5e7eb',
+    borderBottom: `1pt solid ${border}`,
     paddingBottom: 12,
   },
   name: {
     fontSize: 22,
     fontFamily: 'Helvetica-Bold',
+    color: ink,
     marginBottom: 4,
   },
   title: {
     fontSize: 11,
-    color: '#4b5563',
+    fontFamily: 'Helvetica',
+    color: muted,
     marginBottom: 8,
   },
   contactRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    alignItems: 'center',
   },
   contactLink: {
     fontSize: 9,
-    color: '#2563eb',
+    fontFamily: 'Helvetica',
+    color: link,
     textDecoration: 'none',
+  },
+  contactSep: {
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+    color: body,
+    marginHorizontal: 6,
   },
   section: {
     marginTop: 14,
@@ -49,173 +68,173 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 12,
     fontFamily: 'Helvetica-Bold',
+    color: ink,
     marginBottom: 6,
-    color: '#111827',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
   },
   paragraph: {
     fontSize: 10,
-    color: '#374151',
-    marginBottom: 4,
+    fontFamily: 'Helvetica',
+    color: body,
+    lineHeight: 1.45,
   },
-  skillGroup: {
-    marginBottom: 6,
+  skillLine: {
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+    color: body,
+    marginBottom: 4,
+    lineHeight: 1.4,
   },
   skillLabel: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 9,
-    marginBottom: 2,
-  },
-  skillItems: {
-    fontSize: 9,
-    color: '#4b5563',
+    color: ink,
   },
   job: {
     marginBottom: 10,
   },
-  jobHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 2,
-  },
-  jobCompany: {
+  jobLine: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 11,
-  },
-  jobPeriod: {
-    fontSize: 9,
-    color: '#6b7280',
-  },
-  jobRole: {
     fontSize: 10,
-    color: '#4b5563',
+    color: ink,
     marginBottom: 4,
   },
   bullet: {
     fontSize: 9,
-    color: '#374151',
+    fontFamily: 'Helvetica',
+    color: body,
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 2,
+    lineHeight: 1.4,
   },
-  techRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 4,
+  technologies: {
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+    color: body,
     marginTop: 4,
-  },
-  techPill: {
-    fontSize: 8,
-    color: '#374151',
-    backgroundColor: '#f3f4f6',
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 4,
+    lineHeight: 1.4,
   },
   ossItem: {
-    marginBottom: 6,
+    marginBottom: 8,
   },
   ossTitle: {
     fontFamily: 'Helvetica-Bold',
     fontSize: 10,
+    color: ink,
+    marginBottom: 2,
+  },
+  educationLine: {
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    color: body,
   },
 })
 
-Font.registerHyphenationCallback((word) => [word])
-
 const skillLabels: Record<keyof typeof resume.skills, string> = {
-  languages: 'Languages',
   backend: 'Backend',
+  frontend: 'Frontend',
   databases: 'Databases',
-  messaging: 'Messaging',
-  devops: 'DevOps',
   architecture: 'Architecture',
-  others: 'Others',
+  messaging: 'Messaging & Streaming',
+  devops: 'DevOps & Cloud',
+  performance: 'Performance Optimization',
+  testing: 'Testing & Security',
+  programming: 'Programming',
+}
+
+function ContactRow() {
+  return (
+    <View style={styles.contactRow}>
+      <Link src={resume.contact.linkedin} style={styles.contactLink}>
+        LinkedIn
+      </Link>
+      <Text style={styles.contactSep}>|</Text>
+      <Link src={resume.contact.github} style={styles.contactLink}>
+        GitHub
+      </Link>
+      <Text style={styles.contactSep}>|</Text>
+      <Link src={`mailto:${resume.contact.email}`} style={styles.contactLink}>
+        {resume.contact.email}
+      </Link>
+    </View>
+  )
+}
+
+function SectionBlock({
+  title,
+  children,
+}: {
+  title: string
+  children: ReactNode
+}) {
+  return (
+    <View wrap={false} style={styles.section}>
+      <Text style={styles.sectionTitle}>{title}</Text>
+      {children}
+    </View>
+  )
 }
 
 export function ResumeDocument() {
   return (
-    <Document title={`${resume.name} — Resume`}>
+    <Document title={`${resume.name} — Resume`} author={resume.name}>
       <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
+        <View wrap={false} style={styles.header}>
           <Text style={styles.name}>{resume.name}</Text>
           <Text style={styles.title}>{resume.title}</Text>
-          <View style={styles.contactRow}>
-            <Link src={`mailto:${resume.contact.email}`} style={styles.contactLink}>
-              {resume.contact.email}
-            </Link>
-            <Link src={resume.contact.linkedin} style={styles.contactLink}>
-              LinkedIn
-            </Link>
-            <Link src={resume.contact.github} style={styles.contactLink}>
-              GitHub
-            </Link>
-          </View>
+          <ContactRow />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Summary</Text>
+        <SectionBlock title="Summary">
           <Text style={styles.paragraph}>{resume.summary}</Text>
-        </View>
+        </SectionBlock>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Technical Skills</Text>
+        <SectionBlock title="Technical Skills">
           {(Object.entries(resume.skills) as [keyof typeof resume.skills, string[]][]).map(
             ([key, items]) => (
-              <View key={key} style={styles.skillGroup}>
-                <Text style={styles.skillLabel}>{skillLabels[key]}</Text>
-                <Text style={styles.skillItems}>{items.join(' · ')}</Text>
-              </View>
+              <Text key={key} style={styles.skillLine}>
+                <Text style={styles.skillLabel}>{skillLabels[key]}: </Text>
+                {items.join(', ')}
+              </Text>
             ),
           )}
-        </View>
+        </SectionBlock>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Experience</Text>
-          {resume.experience.map((job) => (
-            <View key={job.slug} style={styles.job} wrap={false}>
-              <View style={styles.jobHeader}>
-                <Text style={styles.jobCompany}>{job.company}</Text>
-                <Text style={styles.jobPeriod}>{job.period}</Text>
-              </View>
-              <Text style={styles.jobRole}>
-                {job.role} · {job.location}
+          {resume.experience.map((job, index) => (
+            <View key={job.slug} wrap={false} style={styles.job}>
+              {index === 0 ? (
+                <Text style={styles.sectionTitle}>Experience</Text>
+              ) : null}
+              <Text style={styles.jobLine}>
+                {job.company} - {job.role} | {job.period} | {job.location}
               </Text>
               {job.highlights.map((highlight) => (
                 <Text key={highlight} style={styles.bullet}>
-                  • {highlight}
+                  ● {highlight}
                 </Text>
               ))}
-              <View style={styles.techRow}>
-                {job.technologies.map((tech) => (
-                  <Text key={tech} style={styles.techPill}>
-                    {tech}
-                  </Text>
-                ))}
-              </View>
+              <Text style={styles.technologies}>
+                Technologies: {job.technologies.join(', ')}
+              </Text>
             </View>
           ))}
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Open Source</Text>
+        <SectionBlock title="OSS">
           {resume.oss.map((project) => (
             <View key={project.name} style={styles.ossItem}>
               <Text style={styles.ossTitle}>{project.name}</Text>
               <Text style={styles.paragraph}>{project.description}</Text>
             </View>
           ))}
-        </View>
+        </SectionBlock>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Education</Text>
+        <SectionBlock title="Education">
           {resume.education.map((entry) => (
-            <View key={entry.school}>
-              <Text style={styles.jobCompany}>{entry.school}</Text>
-              <Text style={styles.paragraph}>{entry.degree}</Text>
-            </View>
+            <Text key={entry.school} style={styles.educationLine}>
+              {entry.school} — {entry.degree}
+            </Text>
           ))}
-        </View>
+        </SectionBlock>
       </Page>
     </Document>
   )

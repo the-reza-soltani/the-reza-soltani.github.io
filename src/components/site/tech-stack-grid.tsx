@@ -2,13 +2,15 @@ import { TechIcon } from '#/components/ui/tech-icon'
 import { resume } from '#/data/resume'
 
 const categoryLabels: Record<keyof typeof resume.skills, string> = {
-  languages: 'Languages',
   backend: 'Backend',
+  frontend: 'Frontend',
   databases: 'Databases',
-  messaging: 'Messaging',
-  devops: 'DevOps',
   architecture: 'Architecture',
-  others: 'Others',
+  messaging: 'Messaging & Streaming',
+  devops: 'DevOps & Cloud',
+  performance: 'Performance Optimization',
+  testing: 'Testing & Security',
+  programming: 'Programming',
 }
 
 export function TechStackGrid() {
@@ -26,7 +28,7 @@ export function TechStackGrid() {
         <div className="site-card grid gap-8 p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {entries.map(([key, items]) => (
             <div key={key}>
-              <h3 className="mb-4 text-sm font-semibold text-[var(--text-primary)]">
+              <h3 className="mb-4 font-mono text-xs font-semibold uppercase tracking-wide text-[var(--accent-primary)]">
                 {categoryLabels[key]}
               </h3>
               <ul className="space-y-2.5">

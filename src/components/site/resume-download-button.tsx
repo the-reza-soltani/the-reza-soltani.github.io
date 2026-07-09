@@ -15,6 +15,9 @@ export function ResumeDownloadButton({ variant = 'header' }: ResumeDownloadButto
     try {
       setLoading(true)
       await downloadResumePdf()
+    } catch (error) {
+      console.error('Resume PDF download failed:', error)
+      window.alert('Could not generate the resume PDF. Please try again.')
     } finally {
       setLoading(false)
     }

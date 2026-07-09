@@ -120,6 +120,7 @@ const FALLBACK_MAP: Record<string, TechFallback> = {
   CQRS: { type: 'lucide', icon: Workflow, color: '#f59e0b' },
   Hexagonal: { type: 'lucide', icon: Box, color: '#10b981' },
   Microservices: { type: 'lucide', icon: Blocks, color: '#3b82f6' },
+  'Distributed Systems': { type: 'lucide', icon: Network, color: '#22c55e' },
   'Event-Driven': { type: 'lucide', icon: Zap, color: '#f59e0b' },
   'CI/CD': { type: 'lucide', icon: GitBranch, color: '#f97316' },
   'Unit Testing': { type: 'lucide', icon: TestTube, color: '#22c55e' },
