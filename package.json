@@ -2,7 +2,6 @@
   "name": "the-reza-soltani-github-io",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.1.1",
   "imports": {
     "#/*": "./src/*"
   },
@@ -55,11 +54,5 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vitest": "^4.1.5"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }
